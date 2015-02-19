@@ -1,0 +1,14 @@
+web:
+  build: .
+  command: python app.py
+  ports:
+    - "5000:5000"
+  environment:
+    - PYTHONBUFFERED=1
+  links:
+    - redis
+redis:
+  image: "redis:latest"
+  command: redis-server --appendonly yes
+  ports:
+    - "6379:6379"
