@@ -1,0 +1,34 @@
+{
+    "variables": {
+        "aws_access_key_id": "{{env `AWS_ACCESS_KEY_ID`}}",
+        "aws_secret_access_key": "{{env `AWS_SECRET_ACCESS_KEY`}}"
+    },
+    "builders": [{
+        "type": "amazon-ebs",
+        "access_key": "{{user `aws_access_key_id`}}",
+        "secret_key": "{{user `aws_secret_access_key`}}",
+        "region": "us-west-2",
+        "source_ami": "ami-29ebb519",
+        "instance_type": "t2.micro",
+        "ssh_username": "ubuntu",
+        "ami_name": "ubuntu-docker-{{timestamp}}"
+    }],
+    "push": {
+        "name": "mtchavez/ubuntu-docker",
+        "vcs": false
+    },
+    "provisioners": [{
+        "type": "shell",
+        "inline": [
+            "curl -sSL https://get.docker.com/ubuntu/ | sudo sh"
+        ]
+    }],
+    "post-processors": [{
+        "type": "atlas",
+        "artifact": "mtchavez/ubuntu-docker",
+        "artifact_type": "aws.ami",
+        "metadata": {
+            "created_at": "{{timestamp}}"
+        }
+    }]
+}
