@@ -1,0 +1,10 @@
+variable "access_key" {}
+variable "secret_key" {}
+
+variable "ami" {
+    default = "ami-29ebb519"
+}
+
+variable "region" {
+    default = "us-west-2"
+}

@@ -1,1 +1,4 @@
 aws-config.json
+*.tfvars
+*.tfstate*
+.terraform
