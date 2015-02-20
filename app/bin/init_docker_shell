@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Sets up Docker variables to use a remote Docker host
+# with docker-compose. Turns off TLS so use with caution.
+#
+# Pass host in when sourcing script:
+#
+# $ source init_docker_shell 10.0.0.1
+#
+
+echo "---> Setting docker host to tcp://$1:2376"
+echo
+export DOCKER_HOST="tcp://$1:2376"
+export DOCKER_TLS_VERIFY=
