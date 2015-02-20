@@ -22,6 +22,9 @@
         "inline": [
             "curl -sSL https://get.docker.com/ubuntu/ | sudo sh"
         ]
+    },{
+        "type": "shell",
+        "script": "scripts/setup_docker.sh"
     }],
     "post-processors": [{
         "type": "atlas",
