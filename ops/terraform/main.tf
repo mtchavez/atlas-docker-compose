@@ -5,6 +5,10 @@ provider "aws" {
     region = "${var.region}"
 }
 
+provider "atlas" {
+    token = "${var.atlas_token}"
+}
+
 resource "atlas_artifact" "ubuntu-docker" {
     name = "mtchavez/ubuntu-docker"
     type = "aws.ami"
@@ -27,4 +31,8 @@ resource "aws_instance" "docker-host" {
     instance_type = "t2.micro"
     key_name = "personal-ec2"
     security_groups = ["${aws_security_group.allow_all.name}"]
+}
+
+output "docker-host-ip" {
+    value = "${aws_instance.docker-host.public_ip}"
 }
